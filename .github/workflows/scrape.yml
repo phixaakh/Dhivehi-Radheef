@@ -1,10 +1,9 @@
-YAML
 name: Run Radheef Scraper
 
 on:
-  workflow_dispatch: # Allows you to run it manually with the click of a button
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 0' # Optional: Runs automatically every Sunday at midnight
+    - cron: '0 0 * * 0'
 
 jobs:
   run-scraper:
