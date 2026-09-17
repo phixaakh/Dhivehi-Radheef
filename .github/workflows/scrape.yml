@@ -1,37 +1,21 @@
+YAML
 name: Run Radheef Scraper
-
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * 0'
-
 jobs:
-  run-scraper:
+  run:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Install Playwright Browsers
-        run: playwright install --with-deps chromium
-
-      - name: Run scraper script
-        run: python scraper.py
-
-      - name: Commit and push generated PDF back to repo
-        run: |
-          git config --global user.name "GitHub Action Bot"
-          git config --global user.email "action@github.com"
+      - run: pip install -r requirements.txt
+      - run: playwright install --with-deps chromium
+      - run: python scraper.py
+      - run: |
+          git config --global user.name "Bot"
+          git config --global user.email "bot@bot.com"
           git add radheef_dictionary.pdf
-          git commit -m "Auto-generate latest radheef_dictionary.pdf" || echo "No changes to commit"
+          git commit -m "Update PDF" || true
           git push
