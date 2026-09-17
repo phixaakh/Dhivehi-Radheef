@@ -1,2 +1,2 @@
-requests
-weasyprint
+playwright==1.42.0
+reportlab==4.1.0
